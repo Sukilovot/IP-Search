@@ -4,10 +4,14 @@ from response import main
 
 sg.change_look_and_feel("Black")
 
+user_ip = requests.get("https://api.ipify.org/").text
+print("User ip: {}".format(user_ip))
+
 layout = [
     [sg.Text("IP SEARCH")],
     [sg.Text("API provided by: www.abuseipdb.com")],
     [sg.Text("Write the IP: "), sg.InputText()],
+    [sg.Text("Your ip: {}".format(user_ip))],
     [sg.Button("Search"), sg.Button("Create txt", key="txt"), sg.Button("Exit")],
     [sg.Text("")],
     [sg.Text("Dev: PHC")]
