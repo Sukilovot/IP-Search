@@ -7,11 +7,12 @@ This tool, is for get informations for an IP
 <br>-Requeriments
 </strong>
 <br>
+
 # UPDATE 0.0.2
 <strong>
-   <br>-The program show the public IP of the user<br>
-   <br>-Error window<br>
-   <br>-Add logo<br>
+   <br>-The program show the public IP of the user
+   <br>-Error window
+   <br>-Add logo
 </strong>
 
 # MADE BY SUKILOVOT
