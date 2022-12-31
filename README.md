@@ -8,11 +8,9 @@ This tool, is for get informations for an IP
 </strong>
 <br>
 
-# UPDATE 0.0.2
+# UPDATE 0.0.3
 <strong>
-   <br>-The program show the public IP of the user
-   <br>-Error window
-   <br>-Add logo
+   <br>-Report function addded
 </strong>
 
 # MADE BY SUKILOVOT
