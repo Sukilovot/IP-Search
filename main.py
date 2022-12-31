@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import requests
+from report import report
 from error import error
 from response import main
 
@@ -13,10 +14,15 @@ layout = [
     [sg.Text("API provided by: www.abuseipdb.com")],
     [sg.Text("Write the IP: "), sg.InputText()],
     [sg.Text("Your ip: {}".format(user_ip))],
-    [sg.Button("Search"), sg.Button("Create txt", key="txt"), sg.Button("Exit")],
+    [sg.Button("Search"), sg.Button("Report"), sg.Button("Create txt", key="txt"), sg.Button("Exit")],
     [sg.Text("")],
     [sg.Text("Dev: PHC")]
 ]
+
+headers = {
+    'Accept': 'application/json',
+    'Key': '3fe25b75168ddb506e9026fb30db623f9cfaf2fbdbf1567f6ef6735754bf420642f58c0ae853ba2c'
+}
 
 window = sg.Window("IP Search", layout, icon="favicon.ico")
 
@@ -33,11 +39,6 @@ while True:
             querystring = {
                 'ipAddress': values[0],
                 'maxAgeInDays': '90'
-            }
-
-            headers = {
-                'Accept': 'application/json',
-                'Key': '3fe25b75168ddb506e9026fb30db623f9cfaf2fbdbf1567f6ef6735754bf420642f58c0ae853ba2c'
             }
 
             response = requests.request(method='GET', url=url, headers=headers, params=querystring).json()["data"]
@@ -57,6 +58,9 @@ while True:
         except:
             error()
 
+    if event == "Report":
+        report(values[0])
+
     if event == "txt":
         try:
             url = 'https://api.abuseipdb.com/api/v2/check'
@@ -64,11 +68,6 @@ while True:
             querystring = {
                 'ipAddress': values[0],
                 'maxAgeInDays': '90'
-            }
-
-            headers = {
-                'Accept': 'application/json',
-                'Key': '3fe25b75168ddb506e9026fb30db623f9cfaf2fbdbf1567f6ef6735754bf420642f58c0ae853ba2c'
             }
 
             response = requests.request(method='GET', url=url, headers=headers, params=querystring).json()["data"]
@@ -85,7 +84,10 @@ while True:
                 response["isWhitelisted"] = "Yes"
 
             txt = open(str(response["ipAddress"]) + ".txt", "w").write(f"IP SEARCH\n===\nIP: {response['ipAddress']}\nPublic: {response['isPublic']}"
-            f"\nVersion: {response['ipVersion']}\nWhite listed: {response['isWhitelisted']}\nAbuse confidence store: {response['abuseConfidenceScore']}\nCountry code: {response['countryCode']}\nUsage type: {response['usageType']}\nISP: {response['isp']}\nDomain: {response['domain']}\nHost names: {response['hostnames']}\nTotal reports: {response['totalReports']}\nNumbers of distinct users: {response['numDistinctUsers']}\nLast report at: {response['lastReportedAt']}")
+            f"\nVersion: {response['ipVersion']}\nWhite listed: {response['isWhitelisted']}\nAbuse confidence store: {response['abuseConfidenceScore']}\nCountry code: {response['countryCode']}\nUsage type: {response['usageType']}\n"
+            f"ISP: {response['isp']}\nDomain: {response['domain']}\nHost names: {response['hostnames']}\nTotal reports: {response['totalReports']}"
+            f"\nNumbers of distinct users: {response['numDistinctUsers']}\n"
+            f"Last report at: {response['lastReportedAt']}\n")
         except:
             error()
 

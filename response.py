@@ -18,7 +18,7 @@ def main(response):
         [sg.Button("Sair")]
     ]
 
-    window = sg.Window("IP Search", layout)
+    window = sg.Window("IP Search", layout, icon="favicon.ico")
 
     while True:
         event, values = window.read()
