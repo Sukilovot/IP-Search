@@ -22,7 +22,7 @@ def report(ip):
 
                 params = {
                     'ip': f'{values[0]}',
-                    'categories': f'{values[1]}',
+                    'categories': f'{values[1].replace(" ", "")}',
                     'comment': f'{values[2]}'
                 }
 
